@@ -58,7 +58,8 @@ module.exports = {
                 use: [ {
                     loader: 'html-loader',
                     options: {
-                        minimize: true
+                        minimize: true,
+                        attrs: [':data-src']
                     }
                 }],
             },
@@ -66,12 +67,12 @@ module.exports = {
                 test: /\.(png|jpg|gif|svg)$/,
                 use: [
                     {
-                        loader: 'url-loader',
+                        loader: 'file-loader',
                         options: {
-                            outputPath: 'images/',
-                            publicPublic: '/',
+                            outputPath: './images/',
+                            // publicPublic: '/dist/',
                             limit: 8*1024,//8kb大小以下的图片文件都用base64处理
-                            name: 'images/[hash:8].[ext]',//// hash值为7位，ext自动补全文件扩展名
+                            name: '[hash:8].[ext]',//// hash值为7位，ext自动补全文件扩展名
                         }
                     }
                 ]
