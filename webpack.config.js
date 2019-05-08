@@ -13,7 +13,7 @@ module.exports = {
     entry: {
         app: [
             './js/app.js',
-            './less/uikit3.theme.less'
+            './less/uikit3.theme.less',
         ]
     },
     optimization: {
@@ -39,10 +39,13 @@ module.exports = {
     output: {
         filename: 'js/[name].js',
         path: path.resolve(__dirname, 'dist'),
-        publicPath: "/dist/"
+        publicPath: "/"
     },
     // enable source maps
     devtool: 'inline-source-map',
+    devServer: {
+        contentBase: path.join(__dirname, '/src/'),
+    },
     module: {
         rules: [
             {
@@ -55,13 +58,13 @@ module.exports = {
             },
             {
                 test: /\.html$/,
-                use: [ {
+                use: {
                     loader: 'html-loader',
                     options: {
                         minimize: true,
                         attrs: [':data-src']
                     }
-                }],
+                }
             },
             {
                 test: /\.(png|jpg|gif|svg)$/,
@@ -76,6 +79,21 @@ module.exports = {
                         }
                     }
                 ]
+            },
+            // {
+            //     test: /\.(woff|woff2|eot|ttf|otf)$/,
+            //     loader: "file-loader"
+            // }
+            {
+                test: /\.(woff|woff2|eot|ttf|otf)$/,
+                use: {
+                        loader: 'file-loader',
+                        options: {
+                            outputPath: './fonts/',
+                            name: '[name].[ext]',//// hash值为7位，ext自动补全文件扩展名
+                        }
+                    }
+
             }
         ]
     },
