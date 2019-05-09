@@ -99,8 +99,8 @@ module.exports = {
                 use: {
                         loader: 'file-loader',
                         options: {
-                            outputPath: 'fonts/',
-                            publicPath: "/",
+                            outputPath: './fonts/',
+                            publicPath: "/fonts/",
                             name: '[name].[ext]',//// hash值为7位，ext自动补全文件扩展名
                         }
                     }
