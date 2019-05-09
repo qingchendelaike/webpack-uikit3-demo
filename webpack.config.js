@@ -49,7 +49,7 @@ module.exports = {
     output: {
         filename: 'js/[name].js',
         path: path.resolve(__dirname, 'dist'),
-        publicPath: "/"
+        publicPath: "./"
     },
     // enable source maps
     devtool: 'inline-source-map',
