@@ -49,7 +49,7 @@ module.exports = {
     output: {
         filename: 'js/[name].js',
         path: path.resolve(__dirname, 'dist'),
-        publicPath: "./"
+        publicPath: "/"
     },
     // enable source maps
     devtool: 'inline-source-map',
@@ -100,8 +100,8 @@ module.exports = {
                         loader: 'file-loader',
                         options: {
                             outputPath: './fonts/',
-                            publicPath: "/",
-                            name: '/fonts/[name].[ext]',//// hash值为7位，ext自动补全文件扩展名
+                            // publicPath: "/",
+                            name: '[name].[ext]',//// hash值为7位，ext自动补全文件扩展名
                         }
                     }
 
