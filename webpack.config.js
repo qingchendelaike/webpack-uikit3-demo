@@ -36,6 +36,11 @@ module.exports = {
             new OptimizeCSSAssetsPlugin({})
         ]
     },
+    output: {
+        filename: 'js/[name].js',
+        path: path.resolve(__dirname, 'dist'),
+        publicPath: './'
+    },
     plugins: [
         new CleanWebpackPlugin(),//删除dist
         new HtmlWebpackPlugin({
@@ -46,11 +51,6 @@ module.exports = {
         }),
         new MiniCssExtractPlugin({filename: "css/[name].css",publicPath: "./"}),
     ],
-    output: {
-        filename: 'js/[name].js',
-        path: path.resolve(__dirname, 'dist'),
-        publicPath: "/"
-    },
     // enable source maps
     devtool: 'inline-source-map',
     devServer: {
@@ -58,20 +58,13 @@ module.exports = {
     },
     module: {
         rules: [
-            // {
-            //     test: /\.less$/,
-            //     use: [
-            //         MiniCssExtractPlugin.loader,
-            //         'css-loader',
-            //         'less-loader',
-            //     ],
-            // },
             {
                 test: /\.less$/,
                 use: [
                     {
                         loader: MiniCssExtractPlugin.loader,
                         options: {
+                            name: 'app.css',
                             publicPath: '../',
                         }
                     },
@@ -86,8 +79,8 @@ module.exports = {
                     options: {
                         minimize: false,
                         attrs: [':data-src'],
-                        outputPath: '../images/',
-                        publicPublic: '../',
+                        outputPath: './images',
+                        // publicPath: './images',
                     }
                 }
             },
@@ -95,10 +88,10 @@ module.exports = {
                 test: /\.(png|jpg|gif|svg)$/,
                 use: [
                     {
-                        loader: 'file-loader',
+                        loader: 'url-loader',
                         options: {
                             outputPath: './images/',
-                            publicPublic: '../images/',
+                            publicPath: './images',
                             limit: 8*1024,//8kb大小以下的图片文件都用base64处理
                             name: '[hash:8].[ext]',//// hash值为7位，ext自动补全文件扩展名
                         }
@@ -115,7 +108,7 @@ module.exports = {
                         loader: 'file-loader',
                         options: {
                             outputPath: './fonts/',
-                            // publicPath: "/",
+                            publicPath: "../fonts",
                             name: '[name].[ext]',//// hash值为7位，ext自动补全文件扩展名
                         }
                     }
